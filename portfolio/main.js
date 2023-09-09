@@ -2,16 +2,12 @@ import './style.css'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-
-
 // Load Textures
 const glowTextureSquare = new THREE.TextureLoader().load('images/glow_texture.png');
 const glowTextureCircle = new THREE.TextureLoader().load('images/circular_glow_texture.png');
 const yellowSkinTexture = new THREE.TextureLoader().load('images/snek.jpg');
 const blueSkinTexture = new THREE.TextureLoader().load('images/blew.jpg');
-const sunTexture = new THREE.TextureLoader().load('images/earthlights1k.jpg');
-// const cloudTexture = new THREE.TextureLoader().load('earthcloudmaptrans.jpg');
-
+const sunTexture = new THREE.TextureLoader().load('images/sunny.jpg');
 
 // Setup Renderer, Scene, and Camera
 const scene = new THREE.Scene();
@@ -24,8 +20,13 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
 camera.position.setX(-3);
 
-renderer.render(scene, camera);
+// Add the OrbitControls here
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enablePan = false; // disable panning
+controls.enableZoom = false; // disable zooming
+controls.enabled = false; // disable controls initially
 
+renderer.render(scene, camera);
 
 
 // Torus with Snake Skin Texture
@@ -42,7 +43,6 @@ scene.add(torus);
 
 yellowSkinTexture.wrapS = yellowSkinTexture.wrapT = THREE.RepeatWrapping;
 yellowSkinTexture.repeat.set(5, 5);
-
 
 
 // Lighting Setup
@@ -62,17 +62,8 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 torus.castShadow = true;
 torus.receiveShadow = true;
 
-// Cloud sphere
-// const cloudGeometry = new THREE.SphereGeometry(10.5, 30, 30);  // A bit larger than the sun
-// const cloudMaterial = new THREE.MeshBasicMaterial({
-//     map: cloudTexture,
-//     transparent: true,  // This allows transparency
-//     opacity: 0.6        // Adjust to your preference
-// });
-// const clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
-// scene.add(clouds);
 
-// Earth with Animated Texture
+// Sun 
 sunTexture.wrapS = THREE.RepeatWrapping;
 const sunGeometry = new THREE.SphereGeometry(10, 30, 30);
 const sunMaterial = new THREE.MeshBasicMaterial({
@@ -89,6 +80,21 @@ function animateSunTexture() {
     sun.material.map.offset.x = frameOffset;
     currentFrame = (currentFrame + 1) % totalFrames;
 }
+
+// Traveler/Mars
+const travGeometry = new THREE.SphereGeometry(15, 32, 16); 
+const travelerTexture = new THREE.TextureLoader().load('images/mars.jpg');
+
+travelerTexture.wrapS = travelerTexture.wrapT = THREE.RepeatWrapping;  // Set wrapping mode
+travelerTexture.repeat.set(1, 1);  // Set how many times the texture should repeat
+
+const travMaterial = new THREE.MeshBasicMaterial({ map: travelerTexture }); 
+const traveler = new THREE.Mesh(travGeometry, travMaterial); 
+
+// Set position to top left of the screen
+traveler.position.set(-50, 30, 50); 
+scene.add(traveler);
+
 
 // Accretion Disk
 const accretionDiskGeometry = new THREE.TorusGeometry(11, 3, 100, 16);
@@ -158,6 +164,7 @@ logi.position.x = 2;
 // Scroll Animation
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
+  
   eyeball.rotation.x += 0.05;
   eyeball.rotation.y += 0.075;
   eyeball.rotation.z += 0.05;
@@ -168,10 +175,14 @@ function moveCamera() {
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
   camera.rotation.y = t * -0.0002;
+
+
 }
 
 document.body.onscroll = moveCamera;
 moveCamera();
+
+
 
 // Main Animation Loop
 function animate(){
@@ -184,8 +195,10 @@ function animate(){
   // Rotation of the earth about the z-axis
   accretionDisk.rotation.z += 0.005; 
 
-  // clouds.rotation.y -= 0.005;
-
+  // Traveler
+  traveler.rotation.x += 0.005;
+  traveler.rotation.y += 0.005;
+  // Eyeball
   eyeball.rotation.x += 0.005;
 
   animateSunTexture();  // animate the sun's texture
