@@ -3,11 +3,11 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 // Load Textures
-const glowTextureSquare = new THREE.TextureLoader().load('images/glow_texture.png');
-const glowTextureCircle = new THREE.TextureLoader().load('images/circular_glow_texture.png');
-const yellowSkinTexture = new THREE.TextureLoader().load('images/snek.jpg');
-const blueSkinTexture = new THREE.TextureLoader().load('images/blew.jpg');
-const sunTexture = new THREE.TextureLoader().load('images/sunny.jpg');
+const glowTextureSquare = new THREE.TextureLoader().load('/static/images/glow_texture.png');
+const glowTextureCircle = new THREE.TextureLoader().load('/static/images/circular_glow_texture.png');
+const yellowSkinTexture = new THREE.TextureLoader().load('/static/images/snek.jpg');
+const blueSkinTexture = new THREE.TextureLoader().load('/static/images/blew.jpg');
+const sunTexture = new THREE.TextureLoader().load('/static/images/sunny.jpg');
 
 // Setup Renderer, Scene, and Camera
 const scene = new THREE.Scene();
@@ -99,7 +99,7 @@ function animateSunTexture() {
 
 // Traveler/Mars
 const travGeometry = new THREE.SphereGeometry(15, 32, 16); 
-const travelerTexture = new THREE.TextureLoader().load('images/mars.jpg');
+const travelerTexture = new THREE.TextureLoader().load('/static/images/mars.jpg');
 
 travelerTexture.wrapS = travelerTexture.wrapT = THREE.RepeatWrapping;  // Set wrapping mode
 travelerTexture.repeat.set(1, 1);  // Set how many times the texture should repeat
@@ -160,14 +160,14 @@ function addStar() {
 Array(350).fill().forEach(addStar);
 
 // Background and Other Meshes
-const spaceTexture = new THREE.TextureLoader().load('images/darkspace.jpg');
+const spaceTexture = new THREE.TextureLoader().load('/static/images/darkspace.jpg');
 scene.background = spaceTexture;
 
-const logiTexture = new THREE.TextureLoader().load('images/selfie.jpg');
+const logiTexture = new THREE.TextureLoader().load('/static/images/selfie.jpg');
 const logi = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: logiTexture }));
 scene.add(logi);
 
-const eyeballTexture = new THREE.TextureLoader().load('images/galeye.jpg');
+const eyeballTexture = new THREE.TextureLoader().load('/static/images/galeye.jpg');
 const eyeball = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshStandardMaterial({ map: eyeballTexture }));
 scene.add(eyeball);
 
