@@ -3,6 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Krub:wght@700&family=Nanum+Gothic+Coding&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Krub:wght@700&family=MedievalSharp&family=Nanum+Gothic+Coding&display=swap');
 
+blockquote, p {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+
 
 body {
   font-family: 'Arial', sans-serif;
@@ -150,9 +156,10 @@ canvas {
     background-color: #060606b9;
   }
 
-  .manifest {
+  .manifest p{
     text-align: justify;
     background-color: #060606b9;
+    /* visibility: hidden; */
   }
 
   .divider {

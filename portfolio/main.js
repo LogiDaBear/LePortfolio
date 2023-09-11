@@ -20,6 +20,22 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
 camera.position.setX(-3);
 
+document.addEventListener('scroll', function() {
+    // Select both blockquote and p tags inside .manifest
+    const elements = document.querySelectorAll('blockquote, p');
+
+    elements.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+            element.style.opacity = '1';
+        } else {
+            element.style.opacity = '0';
+        }
+    });
+});
+
+
+
 // Add the OrbitControls here
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enablePan = false; // disable panning
