@@ -35,16 +35,18 @@ document.addEventListener('scroll', function() {
         }
     });
 });
+
 // Start scroll animation indicator
-const arrow = document.querySelector('.down-arrow');
+const arrowContainer = document.querySelector('.down-arrow-container');
 
 window.addEventListener('scroll', function() {
   if (window.scrollY > 0) {
-    arrow.style.display = 'none';
+    arrowContainer.style.display = 'none';
   } else {
-    arrow.style.display = 'block';
+    arrowContainer.style.display = 'block';
   }
 });
+
 
 // Keeps the bottom visible once scrolled all the way down
 document.addEventListener('scroll', function() {
@@ -194,18 +196,34 @@ function addStar() {
 
 Array(350).fill().forEach(addStar);
 
-// Background and Other Meshes
+// Background
 const spaceTexture = new THREE.TextureLoader().load('/static/images/darkspace.jpg');
 scene.background = spaceTexture;
 
-const logiTexture = new THREE.TextureLoader().load('/static/images/selfie.jpg');
-const logi = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: logiTexture }));
+// Cube and selfie images
+const side1Texture = new THREE.TextureLoader().load('/static/images/us.jpg');
+const side2Texture = new THREE.TextureLoader().load('/static/images/kids.jpg');
+const side3Texture = new THREE.TextureLoader().load('/static/images/fam.jpg');
+const side4Texture = new THREE.TextureLoader().load('/static/images/king.jpg');
+const side5Texture = new THREE.TextureLoader().load('/static/images/selfie.jpg');
+const side6Texture = new THREE.TextureLoader().load('/static/images/deployed.jpg');
+const materials = [
+    new THREE.MeshBasicMaterial({ map: side1Texture }),
+    new THREE.MeshBasicMaterial({ map: side2Texture }),
+    new THREE.MeshBasicMaterial({ map: side3Texture }),
+    new THREE.MeshBasicMaterial({ map: side4Texture }),
+    new THREE.MeshBasicMaterial({ map: side5Texture }),
+    new THREE.MeshBasicMaterial({ map: side6Texture })
+];
+const logi = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), materials);
 scene.add(logi);
 
+// Eyeball moon
 const eyeballTexture = new THREE.TextureLoader().load('/static/images/galeye.jpg');
 const eyeball = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshStandardMaterial({ map: eyeballTexture }));
 scene.add(eyeball);
 
+// Positions of eyeball and cube
 eyeball.position.z = 30;
 eyeball.position.setX(-10);
 

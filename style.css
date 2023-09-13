@@ -94,7 +94,6 @@ main {
 }
 
 h1, h2, h3 {
-  /* font-family: elevon, sans-serif; */
   font-weight: 700;
   font-style: normal;
 }
@@ -178,18 +177,49 @@ canvas {
   object-fit: cover;
 }
 
-.down-arrow {
-  position: absolute;
+.down-arrow-container {
+  bottom: 10px;  /* Adjust this as needed to position the entire container */
+  left: 50%;
+  transform: translateX(-21%);
+  text-align: center;
   top: calc(100vh - 60px);
   left: calc(50% - 14px);
   width: 10;
   height: 30px;
-  border: 3px solid;
-  border-radius: 4px;
   animation: jumpInfinite 1.5s infinite;
-  color: #f71b1b;
   font-size: 4em;
+  font-family: 'Creepster';
+  
 }
+
+@keyframes colorTransition {
+  0% {
+    color: #ef0202;
+  }
+  25% {
+    color:#e52121
+  }
+  50% {
+    color: #b01c1c;
+  }
+  75% {
+    color:#870000
+  }
+  100% {
+    color: #f41d1d;
+  }
+}
+
+.scroll-text {
+  display: block;
+  color: #41f41d;
+  font-size: 1.2em;
+  margin-bottom: 0px;  /* Space between the text and the arrow */
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  animation: colorTransition 5s infinite; /* Apply the animation here */
+}
+
 
 @keyframes jumpInfinite {
   0% {
@@ -201,19 +231,6 @@ canvas {
   100% {
     margin-top: -40px;
   }
-}
-
-.down-arrow:after {
-  content: " ";
-  position: absolute;
-  top: 18px;
-  left: -11px;
-  width: 18px;
-  height: 18px;
-  border-bottom: 4px solid;
-  border-right: 4px solid;
-  border-radius: 4px;
-  transform: rotateZ(45deg);
 }
 
 .icons {
