@@ -20,6 +20,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
 camera.position.setX(-3);
 
+
+// Scroll text display
 document.addEventListener('scroll', function() {
     // Select both blockquote and p tags inside .manifest
     const elements = document.querySelectorAll('blockquote, p');
@@ -33,8 +35,16 @@ document.addEventListener('scroll', function() {
         }
     });
 });
+// Start scroll animation
+const arrow = document.querySelector('.down-arrow');
 
-
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 0) {
+    arrow.style.display = 'none';
+  } else {
+    arrow.style.display = 'block';
+  }
+});
 
 // Add the OrbitControls here
 const controls = new OrbitControls(camera, renderer.domElement);
