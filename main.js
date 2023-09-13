@@ -21,7 +21,7 @@ camera.position.setZ(30);
 camera.position.setX(-3);
 
 
-// Scroll text display
+// Scroll text display as scroll
 document.addEventListener('scroll', function() {
     // Select both blockquote and p tags inside .manifest
     const elements = document.querySelectorAll('blockquote, p');
@@ -35,7 +35,7 @@ document.addEventListener('scroll', function() {
         }
     });
 });
-// Start scroll animation
+// Start scroll animation indicator
 const arrow = document.querySelector('.down-arrow');
 
 window.addEventListener('scroll', function() {
@@ -45,6 +45,31 @@ window.addEventListener('scroll', function() {
     arrow.style.display = 'block';
   }
 });
+
+// Keeps the bottom visible once scrolled all the way down
+document.addEventListener('scroll', function() {
+    // Select both blockquote and p tags inside .manifest
+    const elements = document.querySelectorAll('blockquote, p');
+
+    // Get the last blockquote in the document
+    const lastBlockquote = document.querySelector('blockquote:last-of-type');
+
+    elements.forEach((element) => {
+        // If the element is the last blockquote, always set its opacity to 1
+        if (element === lastBlockquote) {
+            element.style.opacity = '1';
+            return;
+        }
+
+        const rect = element.getBoundingClientRect();
+        if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+            element.style.opacity = '1';
+        } else {
+            element.style.opacity = '0';
+        }
+    });
+});
+
 
 // Add the OrbitControls here
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -142,7 +167,7 @@ function addStar() {
     const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
     const star = new THREE.Mesh(geometry, material);
 
-    const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(105));
+    const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(700));
     star.position.set(x, y, z);
     scene.add(star);
 
