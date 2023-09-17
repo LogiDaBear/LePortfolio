@@ -68,6 +68,21 @@ canvas {
   left: 0;
 }
 
+.responsive-iframe {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.responsive-iframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 
 :root {
   /* --dark-bg: rgba(15, 15, 15, 0.95); */
@@ -247,16 +262,21 @@ canvas {
   visibility: visible;
 }
 
-body .ghost {
-  position: absolute;
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  background: #424f6f;
+@media (max-width: 768px) { /* This is a common breakpoint for tablets and phones*/
+  #ghost {
+      display: block;      /* Ensures it takes the full width */
+      margin: 10px 0;    
+      text-align: center;  
+      position: absolute;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      background: #424f6f;
+  }
 }
 
 #container {
