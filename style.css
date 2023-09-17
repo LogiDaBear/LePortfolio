@@ -207,24 +207,6 @@ canvas {
   
 }
 
-@keyframes colorTransition {
-  0% {
-    color: #ef0202;
-  }
-  25% {
-    color:#e52121
-  }
-  50% {
-    color: #b01c1c;
-  }
-  75% {
-    color:#870000
-  }
-  100% {
-    color: #f41d1d;
-  }
-}
-
 .scroll-text {
   display: block;
   color: #41f41d;
@@ -233,19 +215,6 @@ canvas {
   opacity: 0.8;
   transition: opacity 0.3s;
   animation: colorTransition 5s infinite; /* Apply the animation here */
-}
-
-
-@keyframes jumpInfinite {
-  0% {
-    margin-top: -40px;
-  }
-  50% {
-    margin-top: 20px;
-  }
-  100% {
-    margin-top: -40px;
-  }
 }
 
 .icons {
@@ -276,6 +245,7 @@ canvas {
       align-items: center;
       margin: 0;
       background: #424f6f;
+      
   }
 }
 
@@ -338,15 +308,24 @@ canvas {
   width: 90px;
   height: 20px;
 }
-
-#spooky #body #eyes:before,
-#spooky #body #eyes:after {
+/* Left eye */
+#spooky #body #eyes:before {
   content: ' ';
   display: block;
   width: 30px;
   height: 30px;
   background: #252c49;
   border-radius: 50%;
+}
+/* Right eye */
+#spooky #body #eyes:after {
+    content: ' ';
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: #252c49;
+    border-radius: 50%;
+    
 }
 
 #spooky #body #mouth {
@@ -362,10 +341,24 @@ canvas {
   content: ' ';
   display: block;
   background: #fff;
-  margin-left: 20px;
+  margin-left: 15px;
   width: 10px;
   height: 10px;
+  clip-path: polygon(0% 0%, 50% 120%, 100% -50%);
 }
+
+#spooky #body #mouth:after {
+  content: ' ';
+  display: block;
+  background: #fff;
+  position: relative;
+  left: 40px;           /* Adjust this value to position the right fang correctly */
+  width: 10px;
+  height: 10px;
+  padding-top: 10%;
+  clip-path: polygon(110% -10%, 0% 140%, 180% 20%);
+}
+
 
 #spooky #body #feet {
   position: absolute;
@@ -411,5 +404,35 @@ canvas {
 
   50% {
       transform: scale(0.8);
+  }
+}
+
+@keyframes jumpInfinite {
+  0% {
+    margin-top: -40px;
+  }
+  50% {
+    margin-top: 20px;
+  }
+  100% {
+    margin-top: -40px;
+  }
+}
+
+@keyframes colorTransition {
+  0% {
+    color: #ef0202;
+  }
+  25% {
+    color:#e52121
+  }
+  50% {
+    color: #b01c1c;
+  }
+  75% {
+    color:#870000
+  }
+  100% {
+    color: #f41d1d;
   }
 }
