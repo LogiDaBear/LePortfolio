@@ -207,6 +207,7 @@ const side3Texture = new THREE.TextureLoader().load('/static/images/fam.jpg');
 const side4Texture = new THREE.TextureLoader().load('/static/images/king.jpg');
 const side5Texture = new THREE.TextureLoader().load('/static/images/selfie.jpg');
 const side6Texture = new THREE.TextureLoader().load('/static/images/deployed.jpg');
+const staffTexture = new THREE.TextureLoader().load('/static/images/staff.jpeg');
 const materials = [
     new THREE.MeshBasicMaterial({ map: side1Texture }),
     new THREE.MeshBasicMaterial({ map: side2Texture }),
@@ -215,8 +216,19 @@ const materials = [
     new THREE.MeshBasicMaterial({ map: side5Texture }),
     new THREE.MeshBasicMaterial({ map: side6Texture })
 ];
+
 const logi = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), materials);
-scene.add(logi);
+const staffPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(3, 3),
+    new THREE.MeshBasicMaterial({ map: staffTexture, side: THREE.DoubleSide })
+);
+staffPlane.position.x = 3;
+staffPlane.rotation.y = Math.PI / 2;
+
+const cubeGroup = new THREE.Group();
+cubeGroup.add(logi);
+cubeGroup.add(staffPlane);
+scene.add(cubeGroup);
 
 // Eyeball moon
 const eyeballTexture = new THREE.TextureLoader().load('/static/images/galeye.jpg');
@@ -227,8 +239,8 @@ scene.add(eyeball);
 eyeball.position.z = 30;
 eyeball.position.setX(-10);
 
-logi.position.z = -5;
-logi.position.x = 2;
+cubeGroup.position.z = -5;
+cubeGroup.position.x = 2;
 
 // Scroll Animation
 function moveCamera() {
@@ -238,8 +250,8 @@ function moveCamera() {
   eyeball.rotation.y += 0.075;
   eyeball.rotation.z += 0.05;
 
-  logi.rotation.y += 0.01;
-  logi.rotation.z += 0.01;
+  cubeGroup.rotation.y += 0.01;
+  cubeGroup.rotation.z += 0.01;
 
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
